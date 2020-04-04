@@ -13,7 +13,7 @@ void initBoard();
 bool charFSM(char rChar);
 
 // TODO: Define any constants that are local to homework.c using #define
-
+#define MAX_RESPONSE_STRING_LENGTH 200
 // This function returns the received char or 0xFF if no char is available
 // valid args are
 //   - \b EUSCI_A0_BASE
@@ -28,6 +28,7 @@ uint8_t UARTGetChar(uint32_t moduleInstance);
 
 void UART_Echo(uint32_t moduleInstance, char transmitChar);
 
-
+// This function transmit the response string
+void UART_TransmitResponse(uint32_t moduleInstance, char* response);
 
 #endif /* HOMEWORK4_H_ */

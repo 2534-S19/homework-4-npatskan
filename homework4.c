@@ -57,7 +57,7 @@ int main(void)
         //       Make sure to reset the success variable after transmission.
         if(finished)
         {
-            UART_Echo(EUSCI_A0_BASE, 't');
+            UART_TransmitResponse(EUSCI_A0_BASE, response);
             finished = false;
         }
 
@@ -95,3 +95,20 @@ void UART_Echo(uint32_t moduleInstance, char transmitChar)
     UART_transmitData(moduleInstance, transmitChar);
 }
 
+
+void UART_TransmitResponse(uint32_t moduleInstance, char* response)
+{
+    char outputChar;
+    int ii = 0;
+    for (ii; ii<MAX_RESPONSE_STRING_LENGTH;ii++)
+    {
+        outputChar = response[ii];
+        if (outputChar != '\0')
+        {
+           while (UART_getInterruptStatus(moduleInstance,EUSCI_A_UART_TRANSMIT_INTERRUPT_FLAG) == 0)
+               {}
+           UART_transmitData(moduleInstance, outputChar);
+        }
+        else return;
+    }
+}
