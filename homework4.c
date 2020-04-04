@@ -73,8 +73,41 @@ void initBoard()
 bool charFSM(char rChar)
 {
     bool finished = false;
-    if(rChar == 'q')
-        finished = true;
+    typedef enum {SX, S2, S25, S253, S2534} state;
+    static state currentState = SX;
+    switch(currentState)
+    {
+    case SX:
+        if(rChar == '2')
+            currentState = S2;
+        break;
+    case S2:
+        if(rChar == '5')
+            currentState =S25;
+        else if(rChar == '2')
+           currentState = S2;
+        break;
+    case S25:
+        if(rChar == '3')
+            currentState =S253;
+        else if(rChar == '2')
+           currentState = S2;
+        break;
+    case S253:
+        if(rChar == '4')
+        {
+            finished = true;
+            currentState =SX;
+        }
+        else if(rChar == '2')
+           currentState = S2;
+        break;
+
+    }
+
+
+    //if(rChar == 'q')
+     //   finished = true;
 
 
     return finished;
