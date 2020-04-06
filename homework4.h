@@ -13,7 +13,7 @@ void initBoard();
 bool charFSM(char rChar);
 
 // Define any constants that are local to homework.c using #define
-#define MAX_RESPONSE_STRING_LENGTH 200
+
 
 
 // This function returns the received char or 0xFF if no char is available

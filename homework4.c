@@ -129,15 +129,13 @@ void UART_TransmitResponse(uint32_t moduleInstance, char* response)
 {
     char outputChar;
     int ii;
-    for (ii = 0; ii<MAX_RESPONSE_STRING_LENGTH;ii++)
+    for (ii = 0;(response[ii] != '\0');ii++)
     {
         outputChar = response[ii];
-        if (outputChar != '\0')
         {
            while (UART_getInterruptStatus(moduleInstance,EUSCI_A_UART_TRANSMIT_INTERRUPT_FLAG) == 0)
                {}
            UART_transmitData(moduleInstance, outputChar);
         }
-        else return;
     }
 }
